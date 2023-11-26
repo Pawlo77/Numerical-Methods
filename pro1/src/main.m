@@ -20,7 +20,7 @@ plotHalley(W_func, a, 0.5, -1, 1, 0.01, 10^-12, 10^3, "./../plots/example1");
 % retrieve x sequence for the same function parameters
 z = halley(W_func, 0.5, 10^-12, 10^3);
 % print final zero point
-fprintf("Final score: %.20f \n", z(length(z)));
+fprintf("Final zero point: %.20f \n", z(length(z)));
 
 % calculate error
 expected = 0.636393495191836;
@@ -38,7 +38,7 @@ fprintf("\na=[" + num2str(a) + "]\n");
 W_func = create_W_func(a);
 plotHalley(W_func, a, -10^-10, -0.5, 0.5, 0.01, 10^-12, 10^3, "./../plots/example2");
 z = halley(W_func, -10^-10, 10^-12, 10^3);
-fprintf("Final score: %.20f \n", z(length(z)));
+fprintf("Final zero point: %.20f \n", z(length(z)));
 error = calculate_error(-0.372210564161923, z(length(z)));
 fprintf("Relative error: " + error + "\n");
 assert(abs(error) < 10^-12);
@@ -52,7 +52,7 @@ W_func = create_W_func(a);
 plotHalley(W_func, a, 0.05, -1, 1, 0.01, 10^-12, 10^3, "./../plots/example3");
 plot_iter_num(W_func, -5:0.1:5, 10^-12, 10^3, "./../plots/example3_iter");
 z = halley(W_func, 0.5, 10^-12, 10^3);
-fprintf("Final score: %.20f \n", z(length(z)));
+fprintf("Final zero point: %.20f \n", z(length(z)));
 error = calculate_error(0.981548363136206, z(length(z)));
 fprintf("Relative error: " + error + "\n");
 assert(abs(error) < 10^-12);
@@ -60,9 +60,9 @@ assert(abs(error) < 10^-12);
 %%% -----------------------------------------------------------------------
 % example 4
 
-a = log(exp(tan(-0.9:0.2:0.9)));
+a = tan(-0.9:0.2:0.9);
 W_func = create_W_func(a);
-plot_function(-5:0.1:5, W_func(-5:0.1:5), "a=[" + num2str(a) + "]", "./../plots/example4");
+plot_function(-1:0.1:1, W_func(-1:0.1:1), "a=[" + num2str(a) + "]", "./../plots/example4");
 plot_iter_num(W_func, -5:0.1:5, 10^-12, 10^3, "./../plots/example4_iter");
 
 %%% -----------------------------------------------------------------------
@@ -70,6 +70,18 @@ plot_iter_num(W_func, -5:0.1:5, 10^-12, 10^3, "./../plots/example4_iter");
 
 a = ones(1, 3);
 W_func = create_W_func(a);
-plot_function(-50:0.1:50, W_func(-50:0.1:50), "a=[" + num2str(a) + "]", "./../plots/example5");
+plot_function(-1:0.1:1, W_func(-1:0.1:1), "a=[" + num2str(a) + "]", "./../plots/example5");
 x = [-20000:1000:-1000, -1000:100:200, 200:10:0];
 plot_iter_num(W_func, x, 10^-12, 10^3, "./../plots/example5_iter");
+
+%%% -----------------------------------------------------------------------
+% example 6
+
+plot_functions(-1:0.1:1, 1:4:20, "W_n look for a just of ones in comprahsion to n", "./../plots/example6");
+a = ones(1, 1);
+W_func = create_W_func(a);
+x = -10^15:10^12:10^15;
+plot_iter_num(W_func, x, 10^-12, 10^3, "./../plots/example6_iter");
+fprintf("\nW_1(10^15): %.1f \n", W_func(10^15));
+z = halley(W_func, 10^15, 10^-12, 10^3);
+fprintf("Final zero point: %.20f \n", z(length(z)));

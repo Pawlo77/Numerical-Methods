@@ -1,6 +1,14 @@
 ---
 export_on_save:
     puppeteer: ["pdf"]
+
+puppeteer:
+  format: "A4"
+  margin: 
+    top: "2cm"
+    bottom: "2cm"
+    right: "1.5cm"
+    left: "1.5cm"
 ---
 
 # <p style="text-align: center;">Project 1</p>
@@ -14,8 +22,7 @@ Given the polynomial
 
 \[w_n(x) = \sum_{k=0}^{n} a_k T_k(x) T_{n-k}(x)\]
 
-where \(x \in \mathbb{R} \), \(T_0, T_1, \ldots, T_n\) - 1'st type Chebyshev polynomials (\(T_k(x) = \cos(k \arccos(x))\), defined for \(x \in [-1, 1]\) and  \(n = 0, 1, \ldots\)), \(a_k \in \mathbb{R}\), \(n \in \mathbb{N} \) - known constants, 
-we'll be looking for zero points of \(w_n(x) \) using Hallye's method.
+where \(x \in \mathbb{R} \), \(T_0, T_1, \ldots, T_n\) - 1'st type Chebyshev polynomials (\(T_k(x) = \cos(k \arccos(x))\), defined for \(x \in [-1, 1]\) and  \(n = 0, 1, \ldots\)), \(a_k \in \mathbb{R}\), \(n \in \mathbb{N} \) - known constants, we'll be looking for zero points of \(w_n(x) \) using Hallye's method.
 
 ## 1. Definition of Hallye's method
 
@@ -94,12 +101,12 @@ W_func = create_W_func(a);
 % plot W_n on range <-1, 1>, and sequence x = (x_1, ...) of next
 % approximations of Haley's method for starting approximation of 0.5
 % tolerance 10^-12 and maximum iteration number 10^3
-plotHalley(W_func, a, 0.5, -1, 1, 0.01, 10^-12, 10^3, "example1.png");
+plotHalley(W_func, a, 0.5, -1, 1, 0.01, 10^-12, 10^3, "./../plots/example1");
 
 % retrieve x sequence for the same function parameters
 z = halley(W_func, 0.5, 10^-12, 10^3);
 % print final zero point
-fprintf("Final score: %.20f \n", z(length(z)));
+fprintf("Final zero point: %.20f \n", z(length(z)));
 
 % calculate error
 expected = 0.636393495191836;
@@ -108,12 +115,13 @@ fprintf("Relative error: " + error + "\n");
 
 % test if method in fact approched it with correct tolerance
 assert(abs(error) < 10^-12);
+
 ```
 
 Which outputs:
 ```bash
 a=[1   2   3   4   5   6   7   8   9  10]
-Final score: 0.63639349519183574522 
+Final zero point: 0.63639349519183574522 
 Relative error: -3.4891e-16
 ```
 
@@ -166,6 +174,22 @@ The only remaining question is how fast can it approach (if it is possible) the 
   <img src="plots/example5_iter.png" alt="Rysunek 1"/>
   <em>We can se that the higher the function value is - thus in our case the further we are from zero point - the longer it takes to reach it. Note however, that the iterations gain is slow, loking alike logarithmic / square root function.</em> 
 </p>
+
+At the end let's look how does the \(W_n\) function looks when \(a = (1, 1, \dots, 1)\) in comprahsion to \(n \in \mathbb{N}\):
+
+<p align="center">
+  <img src="plots/example6.png" alt="Rysunek 1"/>
+  <em>As we can see higher n leads to more bumps in area of 0, however regardless to it's value (except 1) all of these functions begin rappidly growing around -1 and 1</em> 
+</p>
+
+Using what've found out for \(a = (1)\), let's look for number of iterations for Halley's method for very large values:
+
+<p align="center">
+  <img src="plots/example6_iter.png" alt="Rysunek 1"/>
+  <em>It's nearly constant</em> 
+</p>
+
+Please note that \(W_1(10^{15}) = 2000000000000000\) and final zero point for \(10^{15}\) is \(0.00000000000000000000\), so it's far away - but it's not shocking for us, scince it's linear function so after first iteration we'll have s a point \(x_k \in \mathbb{R}\) which is a zero point of a hyperbole that approximates \(W_n\) at point \(x_k \), and from linearility of \(W_n\) it's exactly equivalent to \(0\) regardless of how far away we are from that point.
 
 ## 5. Accuracy analysis
 
