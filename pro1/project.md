@@ -14,7 +14,7 @@ puppeteer:
 # <p style="text-align: center;">Project 1</p>
 
 <p style="text-align: center;"> Numerical methods, Faculty of Mathematics and Information Science, Warsaw University of Technology </p>
-<p style="text-align: center;"><i>Paweł Pozorski</i><br/><i>26.11.2023</i></p>
+<p style="text-align: center;"><i>Paweł Pozorski gr 4</i><br/><i>26.11.2023</i></p>
 
 ### Finding zero points of polynomial \(w_n(x)\) using Halley's method
 
@@ -98,12 +98,7 @@ fprintf("\na=[" + num2str(a) + "]\n");
 % Create W_n of one parameter x
 W_func = create_W_func(a);
 
-% plot W_n on range <-1, 1>, and sequence x = (x_1, ...) of next
-% approximations of Haley's method for starting approximation of 0.5
-% tolerance 10^-12 and maximum iteration number 10^3
-plotHalley(W_func, a, 0.5, -1, 1, 0.01, 10^-12, 10^3, "./../plots/example1");
-
-% retrieve x sequence for the same function parameters
+% retrieve x sequence for starting point of 0.5 and tolerance of 10^-12
 z = halley(W_func, 0.5, 10^-12, 10^3);
 % print final zero point
 fprintf("Final zero point: %.20f \n", z(length(z)));
