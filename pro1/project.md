@@ -109,20 +109,19 @@ z = halley(W_func, 0.5, 10^-12, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
 
 % calculate error
-expected = 0.636393495191836;
+expected = fzero(W_func, 0.5);
 error = calculate_error(expected, z(length(z)));
-fprintf("Relative error: " + error + "\n");
+fprintf("Relative error: " + error + ". Expected zero point is %.20f\n", expected);
 
 % test if method in fact approched it with correct tolerance
 assert(abs(error) < 10^-12);
-
 ```
 
 Which outputs:
 ```bash
 a=[1   2   3   4   5   6   7   8   9  10]
 Final zero point: 0.63639349519183574522 
-Relative error: -3.4891e-16
+Relative error: 0. Expected zero point is 0.63639349519183574522
 ```
 
 ## 4. Computation examples and analysis
@@ -153,7 +152,7 @@ From above image we can easily tell, which of course checks with the math, that 
 
 <p align="center">
   <img src="plots/example4.png" alt="Rysunek 1"/>
-  <em>Function we'll try to approximate with Halley's method. It has many points where its derevative is equal to 0 and many points where its value is close to 0.</em> 
+  <em><i>Example 4.</i> Function we'll try to approximate with Halley's method. It has many points where its derevative is equal to 0 and many points where its value is close to 0.</em> 
 </p>
 
 
@@ -166,7 +165,7 @@ The only remaining question is how fast can it approach (if it is possible) the 
 
 <p align="center">
   <img src="plots/example5.png" alt="Rysunek 1"/>
-  <em>Function graphical representation for small x. As we can see, it raises pretty quickly yet it's extreamly simple and smoth.</em> 
+  <em><i>Example 5.</i> Function graphical representation for small x. As we can see, it raises pretty quickly yet it's extreamly simple and smoth.</em> 
 </p>
 
 
@@ -179,7 +178,7 @@ At the end let's look how does the \(W_n\) function looks when \(a = (1, 1, \dot
 
 <p align="center">
   <img src="plots/example6.png" alt="Rysunek 1"/>
-  <em>As we can see higher n leads to more bumps in area of 0, however regardless to it's value (except 1) all of these functions begin rappidly growing around -1 and 1</em> 
+  <em><i>Example 6.</i> As we can see higher n leads to more bumps in area of 0, however regardless to it's value (except 1) all of these functions begin rappidly growing around -1 and 1</em> 
 </p>
 
 Using what've found out for \(a = (1)\), let's look for number of iterations for Halley's method for very large values:
@@ -202,3 +201,7 @@ Let's now spend a little more time and look what are the accual errors for zero 
 | 3           | 0.981548363136206  | 0.98154836313620497101            | -1.018e-15  |
 
 Although relatively small Wolfram accuracy all of the errors are lower than set tolerance of \(10^{-12}\).
+
+Please note that all of upper examples zero points are checked with zero points returned by <code>fzero</code> function from Matlab, however such testing for our implementation was immposible to be automated thus <code>fzero</code> can return another zero points even if provided with the same starting approximation.
+
+However, for examples 1-3 and 6 both Wolfram and <code>fzero</code> returns zero points that are enough close to our custom Halley's method zero point to meet set tolerance, which concludes correctness of our implementation based on this 4 test cases.

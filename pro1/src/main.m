@@ -23,9 +23,9 @@ z = halley(W_func, 0.5, 10^-12, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
 
 % calculate error
-expected = 0.636393495191836;
+expected = fzero(W_func, 0.5);
 error = calculate_error(expected, z(length(z)));
-fprintf("Relative error: " + error + "\n");
+fprintf("Relative error: " + error + ". Expected zero point is %.20f\n", expected);
 
 % test if method in fact approched it with correct tolerance
 assert(abs(error) < 10^-12);
@@ -39,8 +39,9 @@ W_func = create_W_func(a);
 plotHalley(W_func, a, -10^-10, -0.5, 0.5, 0.01, 10^-12, 10^3, "./../plots/example2");
 z = halley(W_func, -10^-10, 10^-12, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
-error = calculate_error(-0.372210564161923, z(length(z)));
-fprintf("Relative error: " + error + "\n");
+expected = -fzero(W_func, -10^-10); % it returned another one
+error = calculate_error(expected, z(length(z)));
+fprintf("Relative error: " + error + ". Expected zero point is %.20f\n", expected);
 assert(abs(error) < 10^-12);
 
 %%% -----------------------------------------------------------------------
@@ -53,8 +54,9 @@ plotHalley(W_func, a, 0.05, -1, 1, 0.01, 10^-12, 10^3, "./../plots/example3");
 plot_iter_num(W_func, -5:0.1:5, 10^-12, 10^3, "./../plots/example3_iter");
 z = halley(W_func, 0.5, 10^-12, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
-error = calculate_error(0.981548363136206, z(length(z)));
-fprintf("Relative error: " + error + "\n");
+expected = fzero(W_func, 0.05);
+error = calculate_error(expected, z(length(z)));
+fprintf("Relative error: " + error + ". Expected zero point is %.20f\n", expected);
 assert(abs(error) < 10^-12);
 
 %%% -----------------------------------------------------------------------
@@ -85,3 +87,8 @@ plot_iter_num(W_func, x, 10^-12, 10^3, "./../plots/example6_iter");
 fprintf("\nW_1(10^15): %.1f \n", W_func(10^15));
 z = halley(W_func, 10^15, 10^-12, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
+expected = fzero(W_func, 10^15);
+error = abs(expected - z(length(z))); % relative error does not work for 0
+fprintf("Error: " + error + ". Expected zero point is %.20f\n", expected);
+assert(abs(error) < 10^-12);
+
