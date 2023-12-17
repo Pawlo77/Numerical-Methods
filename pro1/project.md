@@ -153,7 +153,7 @@ From above image we can easily tell, which of course checks with the math, that 
 
 <p align="center">
   <img src="plots/example4_iter.png" alt="Rysunek 1"/>
-  <em>As we've expected, Halley's method either finds optimal solution in couple of iterations or gets stuck.</em> 
+  <em>As we've expected, Halley's method either finds optimal solution in couple of iterations or gets stuck</em> 
 </p>
 
 The only remaining question is how fast can it approach (if it is possible) the desired optimum while being relatively far away from it. To anwser this question let's look at next 2 charts that tackle this problem using very simple function:

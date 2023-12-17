@@ -15,3 +15,4 @@ The primary goal of this course is to equip students with skills in utilizing Ma
 - **Lab Folders (lab\*):** These folders represent the Matlab learning path, providing hands-on exercises to reinforce understanding.
 
 - **[Project 1](/pro1/project.pdf):** The first scientific paper focuses on Halley's method for finding zero points of advanced polynomials. Explore the intricacies of this numerical algorithm and its practical applications.
+- **[Project 2](/pro2/project.pdf):** Second scientific paper focuses on Cholesky's decomposition method and more advanced block decomposition that uses it. It includes their application in solving linear equations and some examples.

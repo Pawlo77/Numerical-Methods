@@ -65,7 +65,7 @@ assert(abs(error) < 10^-12);
 a = tan(-0.9:0.2:0.9);
 W_func = create_W_func(a);
 plot_function(-1:0.1:1, W_func(-1:0.1:1), "a=[" + num2str(a) + "]", "./../plots/example4");
-plot_iter_num(W_func, -5:0.1:5, 10^-12, 10^3, "./../plots/example4_iter");
+plot_iter_num(W_func, -1:0.01:1, 10^-12, 10^3, "./../plots/example4_iter");
 
 %%% -----------------------------------------------------------------------
 % example 5
