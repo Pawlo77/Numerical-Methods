@@ -49,7 +49,7 @@ So the Halley's method for next approximation takes a point \(x_k \in \mathbb{R}
 
 For obvious reasons computers are unable to calculate this limit, therefore some convergence criteria must be introduced. In this work's implementation we're using below condition to stop computation:
 
-\[\lvert x_{k+1} - x_k \rvert < \epsilon \land \lvert f(x_{k + 1}) \rvert < \epsilon \]
+\[\lvert x_{k+1} - x_k \rvert < \epsilon \lor \lvert f(x_{k + 1}) \rvert < \epsilon \]
 
 for some \(\epsilon > 0\). Therefore, this \(\epsilon\) is maximum error we can get from this computation, which leaves nearly no space for analysing this method errors. 
 
@@ -153,7 +153,7 @@ From above image we can easily tell, which of course checks with the math, that 
 
 <p align="center">
   <img src="plots/example4_iter.png" alt="Rysunek 1"/>
-  <em>As we've expected, Halley's method either finds optimal solution in couple of iterations or gets stuck</em> 
+  <em>As we've expected, Halley's method either finds optimal solution in couple of iterations or gets stuck. Please note that number of iterations 0 means F(initial_guess) < tolerance</em> 
 </p>
 
 The only remaining question is how fast can it approach (if it is possible) the desired optimum while being relatively far away from it. To anwser this question let's look at next 2 charts that tackle this problem using very simple function:
@@ -180,7 +180,7 @@ Using what've found out for \(a = (1)\), let's look for number of iterations for
 
 <p align="center">
   <img src="plots/example6_iter.png" alt="Rysunek 1"/>
-  <em>It's nearly constant</em> 
+  <em>It's constant, as we expected.</em> 
 </p>
 
 Please note that \(W_1(10^{15}) = 2000000000000000\) and final zero point for \(10^{15}\) is \(0.00000000000000000000\), so it's far away - but it's not shocking for us, scince it's linear function so after first iteration we'll have s a point \(x_k \in \mathbb{R}\) which is a zero point of a hyperbole that approximates \(W_n\) at point \(x_k \), and from linearility of \(W_n\) it's exactly equivalent to \(0\) regardless of how far away we are from that point.

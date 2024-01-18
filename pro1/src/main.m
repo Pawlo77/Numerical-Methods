@@ -65,7 +65,7 @@ assert(abs(error) < 10^-12);
 a = tan(-0.9:0.2:0.9);
 W_func = create_W_func(a);
 plot_function(-1:0.1:1, W_func(-1:0.1:1), "a=[" + num2str(a) + "]", "./../plots/example4");
-plot_iter_num(W_func, -1:0.01:1, 10^-12, 10^3, "./../plots/example4_iter");
+plot_iter_num(W_func, -1:0.01:1, 10^-50, 10^4, "./../plots/example4_iter");
 
 %%% -----------------------------------------------------------------------
 % example 5
@@ -83,12 +83,11 @@ plot_functions(-1:0.1:1, 1:4:20, "W_n look for a just of ones in comprahsion to 
 a = ones(1, 1);
 W_func = create_W_func(a);
 x = -10^15:10^12:10^15;
-plot_iter_num(W_func, x, 10^-12, 10^3, "./../plots/example6_iter");
+plot_iter_num(W_func, x, 10^-20, 10^3, "./../plots/example6_iter");
 fprintf("\nW_1(10^15): %.1f \n", W_func(10^15));
-z = halley(W_func, 10^15, 10^-12, 10^3);
+z = halley(W_func, 10^15, 10^-20, 10^3);
 fprintf("Final zero point: %.20f \n", z(length(z)));
 expected = fzero(W_func, 10^15);
 error = abs(expected - z(length(z))); % relative error does not work for 0
 fprintf("Error: " + error + ". Expected zero point is %.20f\n", expected);
-assert(abs(error) < 10^-12);
-
+assert(abs(error) < 10^-20);
